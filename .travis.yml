@@ -1,7 +1,7 @@
 language: go
 go:
+ - 1.5.2
  - 1.6.2
- - release
 env:
   - "PATH=/home/travis/gopath/bin:$PATH"
 before_install:
@@ -15,7 +15,6 @@ before_install:
   - go get -u github.com/whyrusleeping/gx
   - gx install
 script:
-  - go test -v -covermode=count -coverprofile=coverage.out $(go list ./... | grep -v /vendor/)
   - cd $TRAVIS_BUILD_DIR && ./test_compile.sh
   - goveralls -coverprofile=coverage.out -service travis-ci -repotoken $COVERALLS_TOKEN
 after_success:
